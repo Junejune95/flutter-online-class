@@ -41,8 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    photoLists = loadPhotoData();
     super.initState();
+    photoLists = loadPhotoData();
   }
 
   @override
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
               return FutureBuilder(
                 future: photoLists,
                 builder: (context, AsyncSnapshot<PhotoLists> snapshot) {
-                  print("dataaa ${snapshot.data}");
+                  print("dataaa ${snapshot.hasData} gg");
                   if (snapshot.hasData) {
                     return GridView.builder(
                       itemCount: snapshot.data.photos.length,
@@ -65,9 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           crossAxisCount: 3),
                       itemBuilder: (context, index) {
                         PhotoModel photoModel = snapshot.data.photos[index];
-
                         return GridTile(
-                          child: Image.network(photoModel.url),
+                          child: Image.network(photoModel.thumbnailUrl),
                         );
                       },
                     );
